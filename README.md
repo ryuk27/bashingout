@@ -6,8 +6,6 @@ A complete guide to mastering Bash and Shell scripting — from fundamentals to 
 
 ## 📘 1. **Introduction to Bash/Shell Scripting**
 
----
-
 #### 🐚 **What is Bash/Shell Scripting?**
 **Bash (Bourne Again SHell)** is a **command-line shell** used to interact with the system’s kernel (core of the operating system). It allows users to run commands interactively or write **scripts** (files containing sequences of commands) to automate processes.
 
