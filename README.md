@@ -107,12 +107,197 @@ Here are some Bash command examples and how they help in red teaming:
 
 ## 🧱 2. Basic Concepts
 
-- Shebang (`#!/bin/bash`)
-- Comments
-- Variables (user-defined, environment)
-- Reading input (`read`)
-- Printing output (`echo`, `printf`)
+#### 🐚 Shebang (#!/bin/bash)
+At the top of any Bash script, you'll usually see the shebang line. This line tells the system which interpreter to use to execute the script.
 
+```bash
+#!/bin/bash
+```
+
+Explanation:
+
+- `#!/bin/bash` tells the system to use Bash as the interpreter.
+- It's important to include this at the start of every script for portability.
+- Without this line, the script will be executed by the default shell, which might not be Bash.
+
+#### 📝 Comments
+Comments are written using the # symbol. Anything following # in a line will be ignored by the interpreter, making comments an essential tool for explaining your code.
+
+```bash
+#!/bin/bash
+# This is a comment explaining the next line of code
+echo "Hello, World!"  # This prints "Hello, World!"
+```
+
+Single-line comment:
+
+```bash
+# This is a comment
+```
+
+Multiline comments: Bash doesn't have a built-in way to do multi-line comments like Python or other languages. However, you can use a trick by wrapping the comments in a block.
+
+```bash
+: ' 
+This is a 
+multi-line comment 
+'
+```
+
+#### 🧳 Variables
+Variables are used to store values. In Bash, you don't need to declare the type of the variable, as it is inferred.
+
+```bash
+#!/bin/bash
+# Assigning a value to a variable
+name="John Doe"
+echo "Hello, $name!"
+```
+
+Local variables: Simple key-value pairs
+
+```bash
+age=25
+```
+
+Environment variables: Can be accessed globally and are usually defined with export.
+
+```bash
+export PATH="$PATH:/new/path"
+```
+
+Accessing variables: You can access variables by using $ or {} for clarity:
+
+```bash
+echo "Name: $name"
+echo "Age: ${age}"
+```
+
+Special variables:
+
+- `$0`: The script name
+- `$1`, `$2`, `$3`,...: Positional parameters (arguments passed to the script)
+- `$@`: All arguments as a list
+- `$#`: Number of arguments passed to the script
+- `$?`: Exit status of the last command
+
+#### 📝 Reading Input from the User (read)
+You can prompt the user to enter input using the read command.
+
+```bash
+#!/bin/bash
+# Ask for the user's name
+echo "Enter your name:"
+read name
+echo "Hello, $name!"
+```
+
+Explanation: The read command waits for the user to type something and stores it in the variable name.
+
+#### 💬 Printing Output (echo and printf)
+echo: Simple command to print text to the screen.
+
+```bash
+echo "Hello, World!"
+```
+
+printf: More flexible than echo for formatted output.
+
+```bash
+printf "Hello, %s!\n" "$name"
+```
+
+echo automatically adds a newline at the end of the output. If you need more control over formatting, use printf.
+
+#### 🎯 Exit Status and Exit Codes
+Every command in Bash returns an exit status (also called an exit code) to indicate if it ran successfully or failed.
+
+- Success: Exit status 0 means the command ran successfully.
+- Failure: Exit status non-zero (usually 1 or another number) means something went wrong.
+
+To check the exit status of the last command, use $?.
+
+```bash
+#!/bin/bash
+echo "Hello"
+echo $?  # Will return 0 if the previous echo was successful
+
+ls /nonexistent/directory
+echo $?  # Will return a non-zero value (e.g., 2) if 'ls' fails
+```
+
+#### 🖥️ Executing Commands in Scripts
+You can run system commands directly in Bash scripts. For example:
+
+```bash
+#!/bin/bash
+# Running system commands
+date
+ls -l
+```
+
+Command substitution: Capture the output of a command and assign it to a variable.
+
+```bash
+current_date=$(date)
+echo "The current date is: $current_date"
+```
+
+#### 🏷️ Quoting in Bash
+There are different ways to quote text in Bash to control how variables and special characters are interpreted.
+
+Double Quotes ("): Allows variable expansion (substitution) inside the quotes.
+
+```bash
+name="John"
+echo "Hello, $name!"  # Expands $name to "John"
+```
+
+Single Quotes ('): Prevents variable expansion. Useful for printing exact text.
+
+```bash
+name="John"
+echo 'Hello, $name!'  # Prints the literal text '$name!'
+```
+
+Escape Character (\): Used to escape special characters within double quotes.
+
+```bash
+echo "This is a \"quoted\" word."
+```
+
+#### 🧰 Basic File Operations
+You can use Bash to interact with files and directories. Here are some common commands:
+
+Creating a file:
+
+```bash
+touch file.txt
+```
+
+Listing files:
+
+```bash
+ls
+```
+
+Changing directories:
+
+```bash
+cd /path/to/directory
+```
+
+Deleting a file:
+
+```bash
+rm file.txt
+```
+
+Redirecting output:
+
+```bash
+echo "This is a test" > output.txt
+```
 ---
 
 ## 🔁 3. Control Structures
